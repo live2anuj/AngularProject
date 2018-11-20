@@ -1,0 +1,20 @@
+<div class="container">
+<div class="row">
+    <label >Search your city here : </label> &nbsp;
+    <input type="text" [(ngModel)]="term" class="col-md-12" placeholder="find your city here..." >
+   
+  
+
+<div  *ngFor = "let item of items |filter:term | slice:0:10; let i=index;" [ngStyle]="{backgroundColor:i%2==0?'darkgray':'lightgray'}" class="col-md-12">
+      <p>
+     {{item.name}}
+      </p>
+    </div>
+    
+         
+    
+</div>
+</div> 
+<div *ngFor="let each of JData">
+    {{each.Name}}
+    </div>

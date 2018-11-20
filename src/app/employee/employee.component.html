@@ -1,0 +1,105 @@
+
+<div class="container"  *ngIf="!editModeEnabled">
+    <button class="btn-success  btn btn-primary"  style="width: 200px;"   (click)="OnAddButtonClick()">Add new record</button>
+    <br><br>
+  <div class="row">
+<table class="table table-bordered table-striped" style="text-align: center;">
+  <thead>
+    <tr >
+     <th>EmployeeID</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Gender</th>
+    <th>City</th>
+    <th>Remove Entry</th>
+  </tr>
+
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of Employee; let i=index;">
+    <td>{{employee.Empid}}</td>
+    <td>{{employee.Name}}</td>
+    <td>{{employee.Age}}</td>
+    <td>{{employee.Gender}}</td>
+    <td>{{employee.City}}</td>
+    <td><button class="btn-warning  btn btn-primary" (click)="onDelete(i)">Delete</button></td>
+   </tr>
+   
+  </tbody>
+</table>
+
+</div>
+</div>
+<!-- main app container -->
+<div class="jumbotron" *ngIf="editModeEnabled">
+   
+  <div class="container">
+      
+      <div class="row">
+         
+          <div class="col-md-6 offset-md-3">
+              <h3>Add new employee details</h3>
+              <form name="form"  #f="ngForm" novalidate>
+                  <div class="form-group">
+                      <label for="EmpId">Employee ID</label>
+                      <input type="text" class="form-control" name="EmpId" [(ngModel)]="model.EmpId" #EmpId="ngModel" [ngClass]="{ 'is-invalid': f.submitted && EmpId.invalid }" required />
+                      <div *ngIf="f.submitted && EmpId.invalid" class="invalid-feedback">
+                          <div *ngIf="EmpId.errors.required">Employee Id is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="Name">Name</label>
+                      <input type="text" class="form-control" name="Name" [(ngModel)]="model.Name" #Name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Name.invalid }" required />
+                      <div *ngIf="f.submitted && Name.invalid" class="invalid-feedback">
+                          <div *ngIf="Name.errors.required">Name is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="Age">Age</label>
+                      <input type="number" minlength="1" maxlength="2" class="form-control" name="Age" [(ngModel)]="model.Age" #Age="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Age.invalid }" required Age />
+                      <div *ngIf="f.submitted && Age.invalid" class="invalid-feedback">
+                          <div *ngIf="Age.errors.required">Age is required</div>
+                          <div *ngIf="Age.errors.Age">Age must be a valid Age</div>
+                          <div *ngIf="Age.errors.minlength || Age.errors.maxlength" class="text-danger">Please enter your age in 1/2 digits</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="Gender">Gender</label>
+                      <input type="text" class="form-control" name="Gender" [(ngModel)]="model.Gender" #Gender="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Gender.invalid }" required  />
+                      <div *ngIf="f.submitted && Gender.invalid" class="invalid-feedback">
+                          <div *ngIf="Gender.errors.required">Gender is required</div>
+                          
+                      </div>
+                  </div>
+        
+         <div class="form-group">
+                      <label for="City">City</label>
+                      <input type="text" class="form-control" name="City" [(ngModel)]="model.City" #City="ngModel" [ngClass]="{ 'is-invalid': f.submitted && City.invalid }" required  />
+                      <div *ngIf="f.submitted && City.invalid" class="invalid-feedback">
+                          <div *ngIf="City.errors.required">City is required</div>
+                          
+                      </div>
+                  </div>
+        
+        
+                  <div class="form-group" >
+                      <button [disabled]="f.invalid" style="width: 80px;"  class="btn btn-primary" (click)="OnAddNewRecord(EmpId,Name,Age,Gender,City)">Save</button>
+                      &nbsp;  <button class="btn-warning btn btn-primary"  style="width: 80px;"   (click)="OnAddButtonClick()">Discard</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+<!--
+
+
+User Name <input type="text" [(ngModel)]="MyInput" />
+<input type="button" [disabled]="!MyInput" value="Reset" (click)="MyInput=''" >
+
+
+<button (click)="AddServer()">Add Server</button>
+<div class="container" *ngFor="let arr of Arr" [ngStyle]="{'background-color':arr>=5 ?'green': 'red'}">
+  {{arr}}
+</div>
+-->

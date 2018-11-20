@@ -1,0 +1,32 @@
+<div class="container-fluid">
+        <div style="color: blue;">
+            <h1>{{title}}</h1>
+          
+        </div>
+     
+        <div style="width: 300px;">
+            <form >
+                <div class="form-group">
+                    <label for="item">Item</label> <input type="text"
+                        class="form-control" placeholder="Enter content..." id="item"
+                        required [(ngModel)]="itemValue" name="item">
+                        
+                </div>
+     
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+   
+
+                    
+                </div>
+            </form>
+        </div>
+     
+        <h2>List of names</h2>
+        <div class="col-md-3">
+            <pre *ngFor="let item of items | async; let i=index">{{item.content}}<button type="submit" class="btn btn-danger" (click)="dataservice.deleteRecord(item.content)">Delete</button></pre>
+            
+        </div>
+    </div>
+
+
